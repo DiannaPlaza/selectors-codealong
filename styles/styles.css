@@ -116,6 +116,10 @@ input[type="checkbox"]{
 
 input[type="checkbox"]:checked + .toggleLabel::after{
     right: 5px;
+}
 
+input[type="checkbox"]:active + .toggleLabel::before, 
+input[type="checkbox"]:focus + .toggleLabel::before{
+    background-color: #ED6B55;
 }
 
