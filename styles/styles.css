@@ -8,9 +8,19 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 html{
     font-size: 125%;
 }
+:root {
+    --darkgreen: #1f2d2e;
+    --lightgreen: #234534;
+    --orange: #ED6B55;
+}
+
+body {
+    background: var(--orange);
+}
 body{
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
+    background: var(--orange);
 }
 header{
     background-image: url(../assets/larm-rmah-273854-unsplash.jpg);
@@ -44,7 +54,7 @@ h1{
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+
 }
 button {
     background-color: #ED6B55;
@@ -78,48 +88,162 @@ Light Green - #234534
 Orange - #ED6B55
  */
 
-.toggleLabel {
+.toggle-label {
+    position: relative;
     line-height: 40px;
     padding-right: 100px;
     margin: 15px 0;
-    position: relative;
 }
 
-.toggleLabel::before{
+.toggle-label::before {
     content: "";
+    display: block;
+    position: absolute;
+    right: 0;
     width: 80px;
     height: 40px;
-    background-color: #1f2d2e;
-    display: block;
-    position: absolute;
-    right: 0px;
     border-radius: 100px;
+    background-color: var(--darkgreen);
+    transition: all .2s ease-out;
 }
 
-.toggleLabel::after{
-    content:"";
+.toggle-label::after {
+    content: "";
     width: 30px;
     height: 30px;
-    background-color:white;
     border-radius: 50%;
-    display: block;
+    background-color: white;
     position: absolute;
-    right: 45px;
     top: 5px;
-
+    right: 45px;
+    transition: all .2s ease-out;
 }
 
-input[type="checkbox"]{
+[type="checkbox"] {
     position: absolute;
     opacity: 0;
 }
 
-input[type="checkbox"]:checked + .toggleLabel::after{
+[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+[type="checkbox"]:hover + .toggle-label::before,
+[type="checkbox"]:focus + .toggle-label::before {
+    background-color: var(--lightgreen);
+}
+
+
+[type="checkbox"]:checked + .toggle-label::after {
     right: 5px;
+    transition: all .2s ease-out;
 }
 
-input[type="checkbox"]:active + .toggleLabel::before, 
-input[type="checkbox"]:focus + .toggleLabel::before{
-    background-color: #ED6B55;
+[type="checkbox"]:checked + .toggle-label::before {
+    background-color: var(--orange);
+    transition: all .2s ease-out;
 }
 
+.tabs {
+    background: var(--lightgreen);
+}
+
+.tabs .content {
+    background: white;
+}
+
+.tabs label {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.content > div {
+    display: none;
+    padding: 20px;
+}
+
+#spider-tab:checked ~ .content .firstPlant,
+#snake-tab:checked ~ .content .secondPlant,
+#philo-tab:checked ~ .content .thirdPlant {
+    display: block;
+}
+
+.tabs input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.tabs label:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.tabs label:active {
+    cursor: grabbing;
+}
+
+.tabs input:checked + label {
+    text-decoration: underline;
+}
+
+.tabs label .fa-angle-double-down {
+    display: none;
+    position: absolute;
+    color: var(--orange);
+    right: 50px;
+    top: 20px;
+}
+
+.tabs input:checked + label .fa-angle-double-down {
+    display: block;
+}
+
+@media (min-width: 480px) {
+    .feedbackForm {
+        width: 75%;
+    }
+
+    .tabs label {
+        display: inline-block;
+        padding: 15px 15px;
+    }
+
+    .tabs label .fa-angle-double-down {
+        right: 0px;
+    }
+
+    .content > div {
+        padding: 25px 50px;
+    }
+}
+
+@media (min-width: 768px) {
+    .feedbackForm {
+        width: 65%;
+    }
+
+    #spider-tab:checked ~ .content .firstPlant,
+    #snake-tab:checked ~ .content .secondPlant,
+    #philo-tab:checked ~ .content .thirdPlant {
+        display: flex;
+    }
+
+    .imgContainer {
+        width: 50%;
+        margin-right: 25px;
+    }
+
+    .imgContainer img {
+        border-radius: 10px;
+    }
+
+    .plantDescription {
+        width: 50%;
+    }
+
+    .plantDescription p {
+        margin: 0;
+    }
+}
